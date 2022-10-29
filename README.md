@@ -2,4 +2,4 @@
 
 repo for grafkom courses project
 
-make pacman game wannabe
+create a pacman game wannabe

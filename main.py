@@ -19,26 +19,41 @@ def linePos():
     glVertex2f(0,-h)
     glEnd()
 
-def iterate():
-    glViewport(0, 0, w, h)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
+def init():
+    glClearColor(0.0, 0.0, 0.0, 1.0)
     glOrtho(-(w/2), w/2, -(h/2), h/2, 0.0, 1.0)
-    glMatrixMode (GL_MODELVIEW)
-    glLoadIdentity()
 
 def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    iterate()
     linePos()
-    glutSwapBuffers()
+    glFlush()
 
-glutInit()
-glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(w, h)
-glutInitWindowPosition(int(w_position), int(h_position))
-wind = glutCreateWindow("OpenGL Coding Practice")
-glutDisplayFunc(showScreen)
-glutIdleFunc(showScreen)
-glutMainLoop()
+
+def update(value):
+    glutReshapeWindow(w,h)
+    glutPostRedisplay()
+    glutTimerFunc(10,update,0)
+
+# sementara
+def resize_window(button, state, x,y):
+    global w,h
+    if button == GLUT_LEFT_BUTTON:
+        w,h = 1024,768
+    elif button == GLUT_RIGHT_BUTTON:
+        w,h = 800,600
+
+def main():
+    glutInit()
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
+    glutInitWindowSize(w, h)
+    glutInitWindowPosition(int(w_position), int(h_position))
+    glutCreateWindow("Project Pacman Wannabe")
+    glutDisplayFunc(showScreen)
+    glutMouseFunc(resize_window)
+    glutIdleFunc(showScreen)
+    glutTimerFunc(50,update,0)
+    init()
+    glutMainLoop()
+
+if __name__ == '__main__':
+    main()

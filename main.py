@@ -12,9 +12,6 @@ def linePos():
     glBegin(GL_LINES)
     glVertex2f(w, 0)
     glVertex2f(-w, 0)
-    glEnd()
-
-    glBegin(GL_LINES)
     glVertex2f(0,h)
     glVertex2f(0,-h)
     glEnd()
@@ -28,19 +25,21 @@ def showScreen():
     linePos()
     glFlush()
 
-
 def update(value):
     glutReshapeWindow(w,h)
+    glutPositionWindow(int(w_position), int(h_position))
     glutPostRedisplay()
     glutTimerFunc(10,update,0)
 
 # sementara
 def resize_window(button, state, x,y):
-    global w,h
+    global w, h, w_position, h_position
     if button == GLUT_LEFT_BUTTON:
-        w,h = 1024,768
+        w,h = 600,450
+        w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
     elif button == GLUT_RIGHT_BUTTON:
         w,h = 800,600
+        w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
 
 def main():
     glutInit()

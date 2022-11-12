@@ -3,10 +3,10 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import random as rn
-from logic_enemy import *
 
 w,h = 800,600
 w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
+
 
 def linePos():
     glColor3ub(255,255,255)
@@ -16,6 +16,33 @@ def linePos():
     glVertex2f(0,h)
     glVertex2f(0,-h)
     glEnd()
+
+geser = 0
+
+def enemy():
+    global geser
+
+    glPushMatrix()
+    glColor3ub(255,255,255)
+
+    if geser>=248:
+        geser=0
+    else:
+        geser+=1
+    glTranslated(geser,0,0)
+
+        
+    print(geser)
+
+    glBegin(GL_POLYGON)
+    glVertex2f(100, 50)
+    glVertex2f(100, 100)
+    glVertex2f(150, 100)
+    glVertex2f(150, 50)
+    glEnd()
+
+    glPopMatrix()
+
 
 def init():
     glClearColor(0.0, 0.0, 0.0, 1.0)
@@ -28,20 +55,8 @@ def showScreen():
     glFlush()
 
 def update(value):
-    glutReshapeWindow(w,h)
-    glutPositionWindow(int(w_position), int(h_position))
     glutPostRedisplay()
     glutTimerFunc(50,update,0)
-
-# sementara
-def resize_window(button, state, x,y):
-    global w, h, w_position, h_position
-    if button == GLUT_LEFT_BUTTON:
-        w,h = 600,450
-        w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
-    elif button == GLUT_RIGHT_BUTTON:
-        w,h = 800,600
-        w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
 
 def main():
     glutInit()
@@ -50,7 +65,6 @@ def main():
     glutInitWindowPosition(int(w_position), int(h_position))
     glutCreateWindow("Project Pacman Wannabe")
     glutDisplayFunc(showScreen)
-    glutMouseFunc(resize_window)
     glutTimerFunc(10,update,0)
     init()
     glutMainLoop()

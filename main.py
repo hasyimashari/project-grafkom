@@ -31,7 +31,7 @@ def update(value):
     glutReshapeWindow(w,h)
     glutPositionWindow(int(w_position), int(h_position))
     glutPostRedisplay()
-    glutTimerFunc(50,update,0)
+    glutTimerFunc(25,update,0)
 
 # sementara
 def resize_window(button, state, x,y):

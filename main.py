@@ -4,6 +4,7 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import random as rn
 from logic_enemy import *
+from logic_player import *
 
 w,h = 800,600
 w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
@@ -25,6 +26,7 @@ def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     linePos()
     enemy()
+    player()
     glFlush()
 
 def update(value):
@@ -50,6 +52,7 @@ def main():
     glutInitWindowPosition(int(w_position), int(h_position))
     glutCreateWindow("Project Pacman Wannabe")
     glutDisplayFunc(showScreen)
+    glutSpecialFunc(input_keyboard_player)
     glutMouseFunc(resize_window)
     glutTimerFunc(10,update,0)
     init()

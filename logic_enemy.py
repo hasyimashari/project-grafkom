@@ -12,9 +12,9 @@ def enemy():
     glColor3ub(255,255,255)
 
     if x_enemy>=150:
-        move = -1
+        move = -2
     elif x_enemy<-50:
-        move = 1
+        move = 2
     x_enemy = x_enemy+move
     glTranslated(x_enemy,0,0)
 

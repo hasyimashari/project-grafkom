@@ -1,4 +1,4 @@
-from win32api import GetSystemMetrics
+import ctypes
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
@@ -7,7 +7,7 @@ from logic_enemy import *
 from logic_player import *
 
 w,h = 800,600
-w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
+w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 
 def linePos():
     glColor3ub(255,255,255)
@@ -40,10 +40,10 @@ def resize_window(button, state, x,y):
     global w, h, w_position, h_position
     if button == GLUT_LEFT_BUTTON:
         w,h = 600,450
-        w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
+        w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
     elif button == GLUT_RIGHT_BUTTON:
         w,h = 800,600
-        w_position,h_position = (GetSystemMetrics(0)/2)-(w/2), (GetSystemMetrics(1)/2)-(h/2)
+        w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 
 def main():
     glutInit()

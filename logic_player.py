@@ -51,8 +51,4 @@ def input_keyboard_player(key,x,y):
         x_move = -2
         y_move = 0
 
-def exit_game(key, x, y):
-    if ord(key) == 13:
-        glutHideWindow()
-        main_temp.main()
 

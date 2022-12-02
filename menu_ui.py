@@ -15,7 +15,7 @@ class Menu:
 
     def draw_MenuNotSelect(self):
         glColor3ub(255,255,255)
-        glBegin(GL_QUADS)
+        glBegin(GL_LINES)
         glVertex2f(self.x1, self.y1)
         glVertex2f(self.x2, self.y2)
         glVertex2f(self.x3, self.y3)
@@ -31,21 +31,65 @@ class Menu:
         glVertex2f(self.x4, self.y4)
         glEnd()
 
+    # def draw_text(self, text):
+    #     # color = (r, b, g)
+    #     font_style = glut.GLUT_BITMAP_TIMES_ROMAN_24
+    #     glColor3ub(255,255,255)
+    #     line=0
+    #     glRasterPos2f(self.x1-450, self.y1-33)
+    #     for i in text:
+    #         if  i=='\n':
+    #             line=line+1
+    #             glRasterPos2f (xpos, ypos*line)
+    #         else:
+    #             glutBitmapCharacter(font_style, ord(i))
+
 def menu_start_not_selected():
     menu = Menu(400, 100)
     menu.draw_MenuNotSelect()
+    # menu.draw_text("MENU")
 
 def menu_option_not_selected():
     menu = Menu(400, 34)
     menu.draw_MenuNotSelect()
 
-def menu_about_not_selected():
+def menu_exit_not_selected():
     menu = Menu(400, -32)
     menu.draw_MenuNotSelect()
 
-def showScreen():
+def menu_start_selected():
+    menu = Menu(400, 100)
+    menu.draw_MenuSelect()
+
+def menu_option_selected():
+    menu = Menu(400, 34)
+    menu.draw_MenuSelect()
+
+def menu_exit_selected():
+    menu = Menu(400, -32)
+    menu.draw_MenuSelect()
+
+def start():
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    menu_start_selected()
+    menu_option_not_selected()
+    menu_exit_not_selected()
+    glBegin(GL_LINES)
+    glVertex2f(0,0)
+    glVertex2f(100,100)
+    glEnd()
+    glFlush()
+
+def option():
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    menu_start_not_selected()
+    menu_option_selected()
+    menu_exit_not_selected()
+    glFlush()
+
+def exit_game():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     menu_start_not_selected()
     menu_option_not_selected()
-    menu_about_not_selected()
+    menu_exit_selected()
     glFlush()

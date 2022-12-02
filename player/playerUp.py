@@ -53,6 +53,24 @@ def matakanan():
     
     glEnd()
     
+def pusatmatakanan():
+    glBegin(GL_POLYGON)
+    glColor3ub(0,100,168)
+    glVertex2f(500,550)
+    glVertex2f(550,550)
+    glVertex2f(550,450)
+    glVertex2f(500,450)
+    glEnd()
+
+def pusatmatakiri():
+    glBegin(GL_POLYGON)
+    glColor3ub(0,100,168)
+    glVertex2f(250,550)
+    glVertex2f(300,550)
+    glVertex2f(300,450)
+    glVertex2f(250,450)
+    glEnd()
+    
 def iterate():
     glViewport(0, 0, 500, 500)
     glMatrixMode(GL_PROJECTION)
@@ -69,6 +87,8 @@ def showScreen():
     player()
     matakiri()
     matakanan()
+    pusatmatakanan()
+    pusatmatakiri()
     glutSwapBuffers()
     
 glutInit()

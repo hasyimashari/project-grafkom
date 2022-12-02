@@ -8,7 +8,7 @@ w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (cty
 
     
 def iterate():
-    glViewport(0, 0, 500, 500)
+    glViewport(0, 0, w, h)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     glOrtho(-(w/2), w/2, -(h/2), h/2, 0.0, 1.0)

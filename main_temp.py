@@ -2,9 +2,9 @@ import ctypes
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import menu_ui
-import logic_enemy
-import logic_player
+import menu.menu_ui as menu
+import entity.logic_entity as entity
+import player.logic_player as player
 
 w,h = 800,600
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
@@ -16,8 +16,8 @@ def init():
 
 def game_screen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    logic_enemy.enemy()
-    logic_player.player()
+    entity.enemy()
+    player.player()
     glFlush()
 
 def update(value):
@@ -28,11 +28,11 @@ def update(value):
 
 def change_menu():
     if menu_pointer == 1:
-        glutDisplayFunc(menu_ui.start)
+        glutDisplayFunc(menu.start)
     elif menu_pointer == 2:
-        glutDisplayFunc(menu_ui.option)
+        glutDisplayFunc(menu.option)
     elif menu_pointer == 3:
-        glutDisplayFunc(menu_ui.quit_game)
+        glutDisplayFunc(menu.quit_game)
 
 def up_menu(key, x, y):
     global menu_pointer

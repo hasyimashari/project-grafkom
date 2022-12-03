@@ -1,7 +1,6 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import main_temp
 
 x_player = -150 #-100 sama dengan titik 0 x
 y_player = 0    #-100 sama dengan titik 0 y

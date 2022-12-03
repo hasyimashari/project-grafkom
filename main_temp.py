@@ -37,9 +37,9 @@ def change_menu():
 def up_menu(key, x, y):
     global menu_pointer
     if key == GLUT_KEY_UP:
-        menu_pointer = menu_pointer - 1 if menu_pointer > 1 else menu_pointer - 0
+        menu_pointer = menu_pointer - 1 if menu_pointer > 1 else 3
     elif key == GLUT_KEY_DOWN:
-        menu_pointer = menu_pointer + 1 if menu_pointer < 3 else menu_pointer + 0
+        menu_pointer = menu_pointer + 1 if menu_pointer < 3 else 1
     change_menu()
 
 def escape(key, x, y):

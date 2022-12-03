@@ -1,6 +1,7 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+import main_temp
 
 x_player = -150 #-100 sama dengan titik 0 x
 y_player = 0    #-100 sama dengan titik 0 y
@@ -17,7 +18,7 @@ def player():
     x_player = x_player+x_move
     y_player = y_player+y_move
 
-    print(-(w/2)-95, x_player, "+", x_move, w/2-155, "|", -(h/2)-45, y_player, "+", y_move, h/2-105)
+    # print(-(w/2)-95, x_player, "+", x_move, w/2-155, "|", -(h/2)-45, y_player, "+", y_move, h/2-105)
     
     if -(w/2)-95>x_player or x_player>w/2-155:
         x_move = 0
@@ -49,3 +50,5 @@ def input_keyboard_player(key,x,y):
     elif key == GLUT_KEY_LEFT:
         x_move = -2
         y_move = 0
+
+

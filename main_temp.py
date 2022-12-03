@@ -1,4 +1,6 @@
+import sys
 import ctypes
+sys.dont_write_bytecode = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
@@ -80,7 +82,7 @@ def menu_func(key, x, y):
         game_win = glutCreateWindow("Project Pacman Wannabe")
         glutDisplayFunc(game_screen)
         glutKeyboardFunc(escape)
-        glutSpecialFunc(logic_player.input_keyboard_player)
+        glutSpecialFunc(player.input_keyboard_player)
         init()
     elif ord(key) == 13 and menu_pointer == 2:
         pass

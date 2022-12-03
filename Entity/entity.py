@@ -1,4 +1,3 @@
-import ctypes
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
@@ -6,7 +5,7 @@ from OpenGL.GLU import *
 w,h=2000,2000
 
 def Entity():
-    glColor3ub(210,0,0)
+    glColor3ub(232,14,14)
     glBegin(GL_TRIANGLES)
     glVertex2f(200, 300)
     glVertex2f(100, 400)

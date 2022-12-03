@@ -32,7 +32,7 @@ def change_menu():
     elif menu_pointer == 2:
         glutDisplayFunc(menu_ui.option)
     elif menu_pointer == 3:
-        glutDisplayFunc(menu_ui.exit_game)
+        glutDisplayFunc(menu_ui.quit_game)
 
 def up_menu(key, x, y):
     global menu_pointer
@@ -46,7 +46,6 @@ def escape(key, x, y):
     if ord(key) == 26+1:
         current_win = glutGetWindow()
         glutDestroyWindow(current_win)
-        glutLeaveMainLoop()
         main_win()
 
 # def change_res(key, x, y):
@@ -93,7 +92,8 @@ def menu_func(key, x, y):
         # glutSpecialFunc(change_res)
         # init()
     elif ord(key) == 13 and menu_pointer == 3:    
-        glutDestroyWindow(main_win)
+        current_win = glutGetWindow()
+        glutDestroyWindow(current_win)
         glutLeaveMainLoop()       
 
 def main_win():
@@ -108,7 +108,7 @@ def main_win():
     glutSpecialFunc(up_menu)
     glutTimerFunc(10,update,0)
     init()
-    glutMainLoop()
 
 if __name__ == '__main__':
     main_win()
+    glutMainLoop()

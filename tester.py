@@ -29,11 +29,32 @@ def showScreen():
     iterate()
     glColor3f(1.0, 0.0, 3.0)
     # draw_text("halo", 0, 0, 255, 255, 255)
-    glColor3ub(255,255,255)
-    glBegin(GL_LINES)
-    glVertex2f(0,0)
-    glVertex2f(100,100)
-    glEnd()
+    glColor3ub(255,255,255) # glColor3ub(0,0,0)
+    glBegin(GL_POLYGON)     # glBegin(GL_POLYGON)
+
+    # kanan atas (400, 100)         glVertex2f(250,100)     glVertex2f(200,90)
+    #                                         (x-150,y)             (x-200,y-10)
+    # kanan bawah (400, 100-66)     glVertex2f(250,50)      glVertex2f(200,60)
+    #                                         (x-150,y-50)             (x-200,y-40)
+    #                               glVertex2f(235,34)      glVertex2f(190,50)
+    #                                         (x-165,y-66)             (x-210,y-50)
+    # kiri bawah (400-800, 100-66)  glVertex2f(-250,34)     glVertex2f(-200,50)
+    #                                         (x-650,y-66)             (x-600,y-50)
+
+    #                               glVertex2f(-250,90)     glVertex2f(-200,80)
+    #                                         (x-650,y-10)             (x-600,y-20)
+    #kiri atas (400-800, 100)       glVertex2f(-240,100)    glVertex2f(-190,90)
+    #                                         (x-640,y)               (x-590,y-10)
+    glEnd()                 # glEnd()
+    
+    
+    
+    
+    
+    
+    
+    
+    
     glutSwapBuffers()
 
 glutInit()

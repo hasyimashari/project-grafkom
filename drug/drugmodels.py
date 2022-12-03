@@ -4,7 +4,6 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
 w,h=2000,2000
-# w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 
 def modelatas():
     glColor3ub(255, 0, 0)
@@ -18,10 +17,6 @@ def modelatas():
     glVertex2f(220, 320)
     glVertex2f(200, 320)
     glVertex2f(160, 300)
-
-    
-
-    
     glEnd()
 
 def modelbawah():
@@ -35,9 +30,6 @@ def modelbawah():
     glVertex2f(40, 160)
     glVertex2f(40, 180)
     glVertex2f(60, 220)
-    
-
-    
     glEnd()
     
 def iterate():

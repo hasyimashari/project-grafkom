@@ -6,7 +6,7 @@ from OpenGL.GLU import *
 w,h=1200,800
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 
-def map1():
+def map2():
 
 #kotak luar
     glColor3ub(250,0,0)
@@ -95,7 +95,7 @@ def showScreen():
     glLoadIdentity()
     iterate()
     glColor3f(1.0, 0.0, 3.0)
-    map1()
+    map2()
     glutSwapBuffers()
     
 glutInit()

@@ -5,6 +5,28 @@ from OpenGL.GLU import *
 w,h=2000,2000
 
 def Entity():
+    glColor3ub(175,0,0)
+    glLineWidth(5)
+    glBegin(GL_LINE_LOOP)
+    glVertex2f(200, 300)
+    glVertex2f(100, 400)
+    glVertex2f(200, 350)
+    glVertex2f(100, 600)
+    glVertex2f(250, 400)
+    glVertex2f(300, 500)
+    glVertex2f(350, 400)
+    glVertex2f(450, 600)
+    glVertex2f(400, 350)
+    glVertex2f(500, 400)
+    glVertex2f(400, 300)
+    glVertex2f(500, 100)
+    glVertex2f(350, 200)
+    glVertex2f(300, 100)
+    glVertex2f(250, 200)
+    glVertex2f(100, 100)
+    glVertex2f(200, 300)
+    glEnd()
+
     glColor3ub(232,14,14)
     glBegin(GL_TRIANGLES)
     glVertex2f(200, 300)
@@ -80,13 +102,19 @@ def iterate():
     glMatrixMode (GL_MODELVIEW)
     glLoadIdentity()
 
+def just_enity():
+    Entity()
+
+def full_enity():
+    Entity()
+    mulut()
+
 def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     iterate()
     glColor3f(1.0, 0.0, 3.0)
-    Entity()
-    mulut()
+    full_enity()
     glutSwapBuffers()
     
 glutInit()

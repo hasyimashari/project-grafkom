@@ -8,6 +8,7 @@ import playerDown
 import playerLeft 
 import playerRigh
 import playerUp
+import playerIdle
 
 w,h = 800,600
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
@@ -26,12 +27,23 @@ def update(value):
     glutPostRedisplay()
     glutTimerFunc(25,update,0)
 
+def player_idle():
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    init()
+    playerIdle.player()
+    playerIdle.lubang()
+    playerIdle.matakiri()
+    playerIdle.matakanan()
+    playerIdle.pusatmatakanan()
+    playerIdle.pusatmatakiri()
+    glFlush()
+
 def player_right():
     global movex, movey
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
     glTranslated(movex,movey,0)
-    movex+=2
+    movex+=1.5
     movey+=0
     playerRigh.player()
     playerRigh.lubang()
@@ -46,7 +58,7 @@ def player_left():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
     glTranslated(movex,movey,0)
-    movex-=2
+    movex-=1.5
     movey-=0
     playerLeft.player()
     playerLeft.lubang()
@@ -62,7 +74,7 @@ def player_up():
     init()
     glTranslated(movex,movey,0)
     movex+=0
-    movey+=2
+    movey+=1.5
     playerUp.player()
     playerUp.lubang()
     playerUp.matakiri()
@@ -77,7 +89,7 @@ def player_down():
     init()
     glTranslated(movex,movey,0)
     movex-=0
-    movey-=2
+    movey-=1.5
     playerDown.player()
     playerDown.lubang()
     playerDown.matakiri()
@@ -101,7 +113,7 @@ glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
 glutInitWindowSize(w, h)
 glutInitWindowPosition(int(w_position), int(h_position))
 glutCreateWindow("Project Pacman Wannabe")
-glutDisplayFunc(player_right)
+glutDisplayFunc(player_idle)
 glutSpecialFunc(player_move)
 glutTimerFunc(10,update,0)
 # init()

@@ -109,13 +109,3 @@ def pusatmatakiri():
     glVertex2f(300,450)
     glVertex2f(250,450)
     glEnd()
-
-def player_up():
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    player()
-    lubang()
-    matakiri()
-    matakanan()
-    pusatmatakanan()
-    pusatmatakiri()
-    glFlush()

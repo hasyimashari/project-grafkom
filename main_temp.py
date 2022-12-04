@@ -5,8 +5,8 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import menu.menu_ui as menu
-import entity.logic_entity as entity
-import player.logic_player as player
+# import entity.logic_entity as entity
+# import player.logic_player as player
 
 w,h = 800,600
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
@@ -16,11 +16,11 @@ def init():
     glClearColor(0.0, 0.0, 0.0, 1.0)
     glOrtho(-(w/2), w/2, -(h/2), h/2, 0.0, 1.0)
 
-def game_screen():
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    entity.enemy()
-    player.player()
-    glFlush()
+# def game_screen():
+#     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+#     entity.enemy()
+#     player.player()
+#     glFlush()
 
 def update(value):
     glutReshapeWindow(w,h)
@@ -105,7 +105,6 @@ def main_win():
     glutInitWindowPosition(int(w_position), int(h_position))
     main_win = glutCreateWindow("Project Pacman Wannabe")
     change_menu()
-    draw_text("test", -100, 250, 255, 255, 255)
     glutKeyboardFunc(menu_func)
     glutSpecialFunc(up_menu)
     glutTimerFunc(10,update,0)

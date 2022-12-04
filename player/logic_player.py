@@ -1,53 +1,108 @@
+import ctypes
+import sys
+sys.dont_write_bytecode = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+import playerDown 
+import playerLeft 
+import playerRigh
+import playerUp
 
-x_player = -150 #-100 sama dengan titik 0 x
-y_player = 0    #-100 sama dengan titik 0 y
-x_move = 0
-y_move = 0
+w,h = 800,600
+w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
+movex,movey = 0,0
 
-def player():
-    global x_player, y_player, x_move, y_move
-    w,h = glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
+def init():
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    glClearColor(0.0, 0.0, 0.0, 1.0)
+    glOrtho(-(w/2), w/2, -(h/2), h/2, 0.0, 1.0)
+    print(movex, movey)
 
-    glPushMatrix()
-    glColor3ub(255,255,255)
+def update(value):
+    glutReshapeWindow(w,h)
+    glutPositionWindow(int(w_position), int(h_position))
+    glutPostRedisplay()
+    glutTimerFunc(25,update,0)
 
-    x_player = x_player+x_move
-    y_player = y_player+y_move
+def player_right():
+    global movex, movey
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    init()
+    glTranslated(movex,movey,0)
+    movex+=2
+    movey+=0
+    playerRigh.player()
+    playerRigh.lubang()
+    playerRigh.matakiri()
+    playerRigh.matakanan()
+    playerRigh.pusatmatakanan()
+    playerRigh.pusatmatakiri()
+    glFlush()
 
-    # print(-(w/2)-95, x_player, "+", x_move, w/2-155, "|", -(h/2)-45, y_player, "+", y_move, h/2-105)
-    
-    if -(w/2)-95>x_player or x_player>w/2-155:
-        x_move = 0
-    if  -(h/2)-45>y_player or y_player>h/2-105:
-        y_move = 0
+def player_left():
+    global movex, movey
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    init()
+    glTranslated(movex,movey,0)
+    movex-=2
+    movey-=0
+    playerLeft.player()
+    playerLeft.lubang()
+    playerLeft.matakiri()
+    playerLeft.matakanan()
+    playerLeft.pusatmatakanan()
+    playerLeft.pusatmatakiri()
+    glFlush()
 
-    glTranslated(x_player+x_move,y_player+y_move,0)
+def player_up():
+    global movex, movey
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    init()
+    glTranslated(movex,movey,0)
+    movex+=0
+    movey+=2
+    playerUp.player()
+    playerUp.lubang()
+    playerUp.matakiri()
+    playerUp.matakanan()
+    playerUp.pusatmatakanan()
+    playerUp.pusatmatakiri()
+    glFlush()
 
-    glBegin(GL_POLYGON)
-    glVertex2f(100, 50)
-    glVertex2f(100, 100)
-    glVertex2f(150, 100)
-    glVertex2f(150, 50)
-    glEnd()
+def player_down():
+    global movex,movey
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    init()
+    glTranslated(movex,movey,0)
+    movex-=0
+    movey-=2
+    playerDown.player()
+    playerDown.lubang()
+    playerDown.matakiri()
+    playerDown.matakanan()
+    playerDown.pusatmatakanan()
+    playerDown.pusatmatakiri()
+    glFlush()
 
-    glPopMatrix()
-
-def input_keyboard_player(key,x,y):
-    global x_player, y_player, x_move, y_move
-    if key == GLUT_KEY_UP:
-        x_move = 0
-        y_move = 2
-    elif key == GLUT_KEY_DOWN:
-        x_move = 0
-        y_move = -2
-    elif key == GLUT_KEY_RIGHT:
-        x_move = 2
-        y_move = 0
+def player_move(key, x, y):
+    if key == GLUT_KEY_RIGHT:
+        glutDisplayFunc(player_right)
     elif key == GLUT_KEY_LEFT:
-        x_move = -2
-        y_move = 0
+        glutDisplayFunc(player_left)
+    elif key == GLUT_KEY_UP:
+        glutDisplayFunc(player_up)
+    elif key == GLUT_KEY_DOWN:
+        glutDisplayFunc(player_down)
 
-
+glutInit()
+glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
+glutInitWindowSize(w, h)
+glutInitWindowPosition(int(w_position), int(h_position))
+glutCreateWindow("Project Pacman Wannabe")
+glutDisplayFunc(player_right)
+glutSpecialFunc(player_move)
+glutTimerFunc(10,update,0)
+# init()
+glutMainLoop()

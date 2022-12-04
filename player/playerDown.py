@@ -2,9 +2,8 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
-w,h=2000,2000
-
 def player():
+    glScaled(.1,.1,0)
     glColor3ub(0, 255, 0)
     glBegin(GL_POLYGON)
     glVertex2f(300, 100)
@@ -22,7 +21,7 @@ def player():
     glEnd()
 
     glColor3ub(30, 176, 30)
-    glLineWidth(5)
+    glLineWidth(4)
     glBegin(GL_LINE_LOOP)
     glVertex2f(300, 100)
     glVertex2f(100, 200)
@@ -110,33 +109,13 @@ def pusatmatakiri():
     glVertex2f(300,450)
     glVertex2f(250,450)
     glEnd()
-    
-def iterate():
-    glViewport(0, 0, 500, 500)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glOrtho(-1000, 1000, -1000, 1000, 0.0, 1.0)
-    glMatrixMode (GL_MODELVIEW)
-    glLoadIdentity()
 
-def showScreen():
+def player_down():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    iterate()
-    glColor3f(1.0, 0.0, 3.0)
     player()
     lubang()
     matakiri()
     matakanan()
     pusatmatakanan()
     pusatmatakiri()
-    glutSwapBuffers()
-    
-glutInit()
-glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(1000, 1000)
-glutInitWindowPosition(0,0)
-wind = glutCreateWindow("Player rek")
-glutDisplayFunc(showScreen)
-glutIdleFunc(showScreen)
-glutMainLoop()
+    glFlush()

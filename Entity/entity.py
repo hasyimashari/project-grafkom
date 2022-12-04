@@ -5,8 +5,9 @@ from OpenGL.GLU import *
 w,h=2000,2000
 
 def Entity():
+    glScaled(.2,.2,0)
     glColor3ub(175,0,0)
-    glLineWidth(5)
+    glLineWidth(4)
     glBegin(GL_LINE_LOOP)
     glVertex2f(200, 300)
     glVertex2f(100, 400)

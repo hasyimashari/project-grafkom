@@ -30,14 +30,15 @@ def linepos():
     glVertex2f(0, h/2)
     glEnd()
 
-logic_entity.move = 1
+move = 1
+logic_entity.move = move
 
 def entity_win(): 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
     linepos()
     glPushMatrix()
-    logic_entity.RL(100,100, 1)
+    logic_entity.RL(100,100, move)
     glPopMatrix()
     glFlush()
 

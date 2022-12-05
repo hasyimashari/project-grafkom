@@ -19,17 +19,17 @@ def RL(posx, posy, step):
     move_x+=move
     move_y+=0
     center_x+=move
-    print(move_y, posy)
     glTranslated(move_x+posx, move_y+posy,0)
     entity.Entity()
     entity.mulut()
+    return posx+move_x+30, posy+move_y+35
 
 def UD(posx, posy, step):
     global move_y, move, center_y
     move_x=-30
-    if center_y+20>150:
+    if center_y+25>150:
         move=-step
-    elif center_y-20<-150:
+    elif center_y-25<-150:
         move=step
     move_x+=0
     move_y+=move
@@ -37,3 +37,4 @@ def UD(posx, posy, step):
     glTranslated(move_x+posx, move_y+posy,0)
     entity.Entity()
     entity.mulut()
+    return posx+move_x+30, posy+move_y+35

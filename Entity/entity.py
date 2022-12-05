@@ -3,9 +3,9 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
 w,h=2000,2000
-
+#titik tengah 200,250
 def Entity():
-    glScaled(.2,.2,0)
+    glScaled(.1,.1,0)
     glColor3ub(175,0,0)
     glLineWidth(4)
     glBegin(GL_LINE_LOOP)
@@ -94,35 +94,3 @@ def mulut():
     glVertex2f(220,310)
     glVertex2f(250,350)
     glEnd()
-    
-def iterate():
-    glViewport(0, 0, 500, 500)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glOrtho(-1000, 1000, -1000, 1000, 0.0, 1.0)
-    glMatrixMode (GL_MODELVIEW)
-    glLoadIdentity()
-
-def just_enity():
-    Entity()
-
-def full_enity():
-    Entity()
-    mulut()
-
-def showScreen():
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    iterate()
-    glColor3f(1.0, 0.0, 3.0)
-    full_enity()
-    glutSwapBuffers()
-    
-glutInit()
-glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(1000, 1000)
-glutInitWindowPosition(0,0)
-wind = glutCreateWindow("OpenGL Coding Practice")
-glutDisplayFunc(showScreen)
-glutIdleFunc(showScreen)
-glutMainLoop()

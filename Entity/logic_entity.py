@@ -1,28 +1,39 @@
+import ctypes
+import sys
+sys.dont_write_bytecode = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+import entity
 
-x_enemy = -50
-move = 1
+center_x,center_y = 0,0
+move, move_x,move_y = 0, center_x-30, center_y-35
 
-def enemy():
-    global x_enemy, move
+def RL(posx, posy, step):
+    global move_x, move, center_x
+    move_y=-35
+    if center_x+20>150:
+        move=-step
+    elif center_x-20<-150:
+        move=step
+    move_x+=move
+    move_y+=0
+    center_x+=move
+    print(move_y, posy)
+    glTranslated(move_x+posx, move_y+posy,0)
+    entity.Entity()
+    entity.mulut()
 
-    glPushMatrix()
-    glColor3ub(255,255,255)
-
-    if x_enemy>=150:
-        move = -2
-    elif x_enemy<-50:
-        move = 2
-    x_enemy = x_enemy+move
-    glTranslated(x_enemy,0,0)
-
-    glBegin(GL_POLYGON)
-    glVertex2f(100, 50)
-    glVertex2f(100, 100)
-    glVertex2f(150, 100)
-    glVertex2f(150, 50)
-    glEnd()
-
-    glPopMatrix()
+def UD(posx, posy, step):
+    global move_y, move, center_y
+    move_x=-30
+    if center_y+20>150:
+        move=-step
+    elif center_y-20<-150:
+        move=step
+    move_x+=0
+    move_y+=move
+    center_y+=move
+    glTranslated(move_x+posx, move_y+posy,0)
+    entity.Entity()
+    entity.mulut()

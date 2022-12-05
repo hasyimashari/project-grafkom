@@ -4,11 +4,11 @@ sys.dont_write_bytecode = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import playerDown 
-import playerLeft 
-import playerRigh
-import playerUp
-import playerIdle
+from Player import playerDown 
+from Player import playerLeft 
+from Player import playerRigh
+from Player import playerUp
+from Player import playerIdle
 
 movex,movey = -40,-40
 centerx,centery = 0,0

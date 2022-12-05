@@ -56,9 +56,9 @@ def player_right():
     init()
     linepos()
     glTranslated(movex,movey,0)
-    movex+=1.5
+    movex+=2
     movey+=0
-    centerx+=1.5
+    centerx+=2
     centery+=0
     playerRigh.player()
     playerRigh.lubang()
@@ -74,9 +74,9 @@ def player_left():
     init()
     linepos()
     glTranslated(movex,movey,0)
-    movex-=1.5
+    movex-=2
     movey-=0
-    centerx-=1.5
+    centerx-=2
     centery-=0
     playerLeft.player()
     playerLeft.lubang()
@@ -93,9 +93,9 @@ def player_up():
     linepos()
     glTranslated(movex,movey,0)
     movex+=0
-    movey+=1.5
+    movey+=2
     centerx+=0
-    centery+=1.5
+    centery+=2
     playerUp.player()
     playerUp.lubang()
     playerUp.matakiri()
@@ -111,9 +111,9 @@ def player_down():
     linepos()
     glTranslated(movex,movey,0)
     movex-=0
-    movey-=1.5
+    movey-=2
     centerx-=0
-    centery-=1.5
+    centery-=2
     playerDown.player()
     playerDown.lubang()
     playerDown.matakiri()

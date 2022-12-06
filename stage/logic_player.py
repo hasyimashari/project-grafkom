@@ -1,6 +1,3 @@
-import ctypes
-import sys
-sys.dont_write_bytecode = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
@@ -62,11 +59,6 @@ def player_move(posx, posy):
     centerx+=step_x
     centery+=step_y
 
-    if posx+centerx+76>=300 or posy+centerx-76<-300:
-        step_x=0
-    if posx+centery+66>=300 or posy+centery-66<-300:
-        step_y=0
-    
     glTranslated(posx+movex, posy+movey, 0)
     
     if step_x==0 and step_y==0:

@@ -1,6 +1,3 @@
-import ctypes
-import sys
-sys.dont_write_bytecode = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *

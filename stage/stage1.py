@@ -34,28 +34,38 @@ def update(value):
 
 move = 1
 le.move = move
+posx, posy = -100,-100
 
 def stage_screen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
     linepos()
+
     glPushMatrix()
     map1.map1()
     glPopMatrix()
+
     glPushMatrix()
-    pos_player = lp.player_move(-100,-100)
+    pos_player = lp.player_move(posx,posy)
     posx_player = pos_player[0]
     posy_player = pos_player[1]
+    if posx_player+40>=270-4 or posx_player-40<-270+4:
+        lp.step_x=0
+    if posy_player+35>=270 or posy_player-35<-270:
+        lp.step_y=0
     glPopMatrix()
+
     glPushMatrix()
     pos_entity0 = le.RL(0,0, move, 250)
     posx_entity0 = pos_entity0[0]
     posy_entity0 = pos_entity0[1]
     glPopMatrix()
+
     if posy_player+35 >= posy_entity0-25 and posy_player-35 <= posy_entity0+25 and posx_player+100 >= posx_entity0+40 and posx_player-100 <= posx_entity0-40:
         current_win = glutGetWindow()
         glutDestroyWindow(current_win)
         glutLeaveMainLoop()
+        
     glFlush()
 
 glutInit()

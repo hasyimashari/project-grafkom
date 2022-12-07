@@ -4,46 +4,41 @@ from OpenGL.GLU import *
 
 w,h=2000,2000
 
-def modelatas():
+def modelkanan():
     glColor3ub(255, 0, 0)
     glBegin(GL_POLYGON)
-    glVertex2f(107, 264)
-    glVertex2f(173, 196)
-    glVertex2f(223, 239)
-    glVertex2f(235, 263)
-    glVertex2f(238, 284)
-    glVertex2f(234, 302)
-    glVertex2f(220, 314)
-    glVertex2f(200, 317)
-    glVertex2f(178, 314)
-    glVertex2f(157, 304)
+    glVertex2f(55,20)
+    glVertex2f(55,80)
+    glVertex2f(70,80)
+    glVertex2f(90,70)
+    glVertex2f(100,60)
+    glVertex2f(100,40)
+    glVertex2f(90,30)
+    glVertex2f(70,20)
     glEnd()
+    
+def letter():
+    glPushMatrix()
+    glColor3ub(0, 0, 0)
+    glRasterPos2f(25,30)
+    t=":D"
+    for i in t:
+        glutBitmapCharacter(GLUT_BITMAP_8_BY_13,ord(i))
+    glPopMatrix()
+    
 
+def modelkiri():
     glColor3ub(255, 255, 255)
     glBegin(GL_POLYGON)
-    glVertex2f(172, 288)
-    glVertex2f(170, 282)
-    glVertex2f(149, 268)
-    glVertex2f(123, 248)
-    glVertex2f(116, 255)
-    glVertex2f(144, 275)
-    glVertex2f(166, 290)
-    glEnd()
+    glVertex2f(55,20)
+    glVertex2f(55,80)
+    glVertex2f(40,80)
+    glVertex2f(20,70)
+    glVertex2f(10,60)
+    glVertex2f(10,40)
+    glVertex2f(20,30)
+    glVertex2f(40,20)
 
-def modelbawah():
-    glColor3ub(255, 255, 255)
-    glBegin(GL_POLYGON)
-    glVertex2f(111, 261)
-    glVertex2f(170, 200)
-    glVertex2f(120, 160)
-    glVertex2f(102, 148)
-    glVertex2f(77, 136)
-    glVertex2f(52, 135)
-    glVertex2f(36, 144)
-    glVertex2f(31, 161)
-    glVertex2f(34, 182)
-    glVertex2f(44, 203)
-    glVertex2f(60, 220)
     glEnd()
     
 def iterate():
@@ -59,13 +54,14 @@ def showScreen():
     glLoadIdentity()
     iterate()
     glColor3f(1.0, 0.0, 3.0)
-    modelatas()
-    modelbawah()
+    modelkanan()
+    modelkiri()
+    letter()
     glutSwapBuffers()
     
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
-glutInitWindowSize(1000, 1000)
+glutInitWindowSize(500, 500)
 glutInitWindowPosition(0,0)
 wind = glutCreateWindow("Player rek")
 glutDisplayFunc(showScreen)

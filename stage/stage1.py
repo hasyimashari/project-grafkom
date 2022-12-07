@@ -32,7 +32,7 @@ def update(value):
     glutPostRedisplay()
     glutTimerFunc(25,update,0)
 
-move = 1
+move = 2
 le.move = move
 posx, posy = -100,-100
 

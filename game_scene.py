@@ -33,21 +33,30 @@ def update(value):
 
 def display():
     init()
-    if stage1.show_drug0 == False:
-        glPushMatrix()
-        stage4.stage_screen()
-        glPopMatrix()
-        glutSpecialFunc(lp4.input_keyboard_player)
-    # if stage2.show_drug0 == False:
-    #     glPushMatrix()
-    #     stage3.stage_screen()
-    #     glPopMatrix()
-    #     glutSpecialFunc(lp3.input_keyboard_player)
-    else:
+    if stage1.count_collect <= 4:
         glPushMatrix()
         stage1.stage_screen()
         glPopMatrix()
         glutSpecialFunc(lp.input_keyboard_player)
+    if stage1.count_collect >= 4 and stage2.count_collect <= 4:
+        stage1.count_collect+=1
+        glPushMatrix()
+        stage2.stage_screen()
+        glPopMatrix()
+        glutSpecialFunc(lp2.input_keyboard_player)
+    if stage2.count_collect >= 4 and stage3.count_collect <= 4:
+        stage2.count_collect+=1
+        glPushMatrix()
+        stage3.stage_screen()
+        glPopMatrix()
+        glutSpecialFunc(lp3.input_keyboard_player)
+    if stage3.count_collect >= 4 and stage4.count_collect <= 4:
+        stage3.count_collect+=1
+        glPushMatrix()
+        stage4.stage_screen()
+        glPopMatrix()
+        glutSpecialFunc(lp4.input_keyboard_player)
+        
 
 glutInit()
 glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)

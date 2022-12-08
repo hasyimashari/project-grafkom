@@ -33,8 +33,12 @@ show_drug1 = True
 show_drug2 = True
 show_drug3 = True
 
+collect_all = False
+
+count_collect = 0
+
 def stage_screen():
-    global show_drug0, show_drug1, show_drug2, show_drug3
+    global show_drug0, show_drug1, show_drug2, show_drug3, count_collect
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
 
@@ -79,6 +83,8 @@ def stage_screen():
 
         if drug0.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug0 = False
+            count_collect+=1
+
 
     if show_drug1 == True:
         glPushMatrix()
@@ -87,6 +93,8 @@ def stage_screen():
 
         if drug1.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug1 = False
+            count_collect+=1
+
 
     if show_drug2 == True:
         glPushMatrix()
@@ -95,6 +103,8 @@ def stage_screen():
 
         if drug2.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug2 = False
+            count_collect+=1
+
 
     if show_drug3 == True:
         glPushMatrix()
@@ -103,6 +113,8 @@ def stage_screen():
 
         if drug3.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug3 = False
+            count_collect+=1
+
 
 #==========================================
 

@@ -3,8 +3,13 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from drug import drugmodels 
 
-def drug_pos(posx, posy):
-    glTranslated(posx-28, posy-25, 0)
-    drugmodels.modelkanan()
-    drugmodels.modelkiri()
-    return [posx-28, posy-25]
+class Drug:
+    def __init__(self,x,y):
+        glTranslated(x-28, y-25, 0)
+        drugmodels.modelkanan()
+        drugmodels.modelkiri()
+        self.posx_drug = x-28
+        self.posy_drug = y-25
+    
+    def get_col(self,x1,x2,y1,y2):
+        return y1 >= self.posy_drug+10 and y2 <= self.posy_drug+40 and x1 >= self.posx_drug+46 and x2 <= self.posx_drug+10

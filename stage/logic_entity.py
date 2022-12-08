@@ -34,3 +34,30 @@ def UD(posx, posy, step, distance):
     entity.Entity()
     entity.mulut()
     return [posx+center_xUD, posy+center_yUD]
+
+class EntityRL:
+    def __init__(self,x,y,move,distance):
+        self.pos_entity = RL(x,y, move, distance)
+        self.posx_entity = self.pos_entity[0]
+        self.posy_entity = self.pos_entity[1]
+
+    def get_col(self, x1,x2,y1,y2):
+        global moveRL, moveUD
+        if y1 >= self.posy_entity-35 and y2 <= self.posy_entity+35 and x1 >= self.posx_entity+30 and x2 <= self.posx_entity-30:
+            moveRL = 0
+            moveUD = 0
+            return True
+
+class EntityUD:
+    def __init__(self,x,y,move,distance):
+        self.pos_entity = UD(x,y, move, distance)
+        self.posx_entity = self.pos_entity[0]
+        self.posy_entity = self.pos_entity[1]
+
+    def get_col(self, x1,x2,y1,y2):
+        global moveRL, moveUD
+        if y1 >= self.posy_entity-35 and y2 <= self.posy_entity+35 and x1 >= self.posx_entity+30 and x2 <= self.posx_entity-30:
+            moveRL = 0
+            moveUD = 0
+            return True
+

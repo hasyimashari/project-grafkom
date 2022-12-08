@@ -7,7 +7,7 @@ from OpenGL.GLU import *
 import logic_player as lp
 import logic_entity as le
 import logic_drug as lg
-from map import map2
+from map import map4
 
 w,h=1200, 750
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
@@ -39,42 +39,55 @@ def stage_screen():
     init()
 
     glPushMatrix()
-    map2.map2()
+    map4.map4()
     glPopMatrix()
 
 #==========================================
 
     glPushMatrix()
-    pos_player = lp.player_move(-325,200)
+    pos_player = lp.player_move(-400,-200)
     posx_player = pos_player[0]
     posy_player = pos_player[1]
     glPopMatrix()
 
-    if posx_player+40>=450-4 or posx_player-40<-450+4:
-        lp.step_x=0
-    if posy_player+35>315 or posy_player-35<-270:
-        lp.step_y=0
-
-    if posy_player+35>134 and posx_player+40>-180 and posx_player-40<-135:
-        lp.step_y=0
-    if posy_player+35>136 and posx_player+40>-180-6 and posx_player-40<-135+6:
+    if posx_player-40<-495 or posx_player+40>495:
         lp.step_x=0
 
-    if posy_player+35>134 and posx_player+40>135 and posx_player-40<180:
+    if posy_player+35>78 and posx_player+40>-300 and posx_player-40<-200:
         lp.step_y=0
-    if posy_player+35>136 and posx_player+40>135-6 and posx_player-40<180+6:
+    if posy_player+35>80 and posx_player+40>-300-6 and posx_player-40<-200+6:
+        lp.step_x=0
+    if posy_player-35<-78 and posx_player+40>-300 and posx_player-40<-200:
+        lp.step_y=0
+    if posy_player-35<-80 and posx_player+40>-300-6 and posx_player-40<-200+6:
         lp.step_x=0
 
-    if posy_player-35<-90 and (posx_player-40<-135 or posx_player+40>135):
-        lp.step_y = 0
-    if posy_player-35<-94 and (posx_player-40<-135+4 or posx_player+40>135-4):
-        lp.step_x = 0
+    if posy_player+35>78 and posx_player+40>-50 and posx_player-40<50:
+        lp.step_y=0
+    if posy_player+35>80 and posx_player+40>-50-6 and posx_player-40<50+6:
+        lp.step_x=0
+    if posy_player-35<-78 and posx_player+40>-50 and posx_player-40<50:
+        lp.step_y=0
+    if posy_player-35<-80 and posx_player+40>-50-6 and posx_player-40<50+6:
+        lp.step_x=0
+
+    if posy_player+35>78 and posx_player+40>200 and posx_player-40<300:
+        lp.step_y=0
+    if posy_player+35>80 and posx_player+40>200-6 and posx_player-40<300+6:
+        lp.step_x=0
+    if posy_player-35<-78 and posx_player+40>200 and posx_player-40<300:
+        lp.step_y=0
+    if posy_player-35<-80 and posx_player+40>200-6 and posx_player-40<300+6:
+        lp.step_x=0
+
+    if posy_player+35>250 or posy_player-35<-250:
+        lp.step_y=0
 
 #==========================================
 
     if show_drug0 == True:
         glPushMatrix()
-        drug0 = lg.Drug(-321, 25)
+        drug0 = lg.Drug(-400, 200)
         glPopMatrix()
 
         if drug0.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
@@ -82,7 +95,7 @@ def stage_screen():
 
     if show_drug1 == True:
         glPushMatrix()
-        drug1 = lg.Drug(0,-175)
+        drug1 = lg.Drug(-124,200)
         glPopMatrix()
 
         if drug1.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
@@ -90,7 +103,7 @@ def stage_screen():
 
     if show_drug2 == True:
         glPushMatrix()
-        drug2 = lg.Drug(0,200)
+        drug2 = lg.Drug(124,-200)
         glPopMatrix()
 
         if drug2.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
@@ -98,7 +111,7 @@ def stage_screen():
 
     if show_drug3 == True:
         glPushMatrix()
-        drug3 = lg.Drug(320,275)
+        drug3 = lg.Drug(350,-40)
         glPopMatrix()
 
         if drug3.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
@@ -107,7 +120,7 @@ def stage_screen():
 #==========================================
 
     glPushMatrix()
-    entity0 = le.EntityRL(-50, -50, move, 300)
+    entity0 = le.EntityUD(-125,-40, move, 180)
     glPopMatrix()
 
     if entity0.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
@@ -115,7 +128,7 @@ def stage_screen():
         lp.step_y = 0
 
     glPushMatrix()
-    entity1 = le.EntityRL(-50, 100, move, 300)
+    entity1 = le.EntityUD(125,40, move, 180)
     glPopMatrix()
 
     if entity1.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
@@ -123,10 +136,18 @@ def stage_screen():
         lp.step_y = 0
 
     glPushMatrix()
-    entity2 = le.EntityUD(325,100, move, 125)
+    entity2 = le.EntityRL(0,40, move, 50)
     glPopMatrix()
 
     if entity2.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
+        lp.step_x = 0
+        lp.step_y = 0
+
+    glPushMatrix()
+    entity3 = le.EntityRL(250,-40, move, 50)
+    glPopMatrix()
+
+    if entity3.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
         lp.step_x = 0
         lp.step_y = 0
 

@@ -12,15 +12,6 @@ from map import map1
 w,h=1200, 750
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 
-def linepos():
-    glColor3ub(255, 255, 255)
-    glBegin(GL_LINES)
-    glVertex2f(-(w/2), 0)
-    glVertex2f(w/2, 0)
-    glVertex2f(0, -(h/2))
-    glVertex2f(0, h/2)
-    glEnd()
-
 def init():
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
@@ -37,10 +28,15 @@ move = 1.5
 le.moveRL = move
 le.moveUD = move
 
+show_drug0 = True
+show_drug1 = True
+show_drug2 = True
+show_drug3 = True
+        
 def stage_screen():
+    global show_drug0, show_drug1, show_drug2, show_drug3
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
-    linepos()
 
     glPushMatrix()
     map1.map1()
@@ -60,74 +56,56 @@ def stage_screen():
         lp.step_y=0
 
 #==========================================
+    if show_drug0 == True:
+        glPushMatrix()
+        drug0 = lg.Drug(-200, 200)
+        glPopMatrix()
 
-    glPushMatrix()
-    pos_drug0 = lg.drug_pos(-200, 200)
-    posx_drug0 = pos_drug0[0]
-    posy_drug0 = pos_drug0[1]
-    glPopMatrix()
+        if drug0.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
+            show_drug0 = False
 
-    if posy_player+35 >= posy_drug0+10 and posy_player-35 <= posy_drug0+40 and posx_player+80 >= posx_drug0+46 and posx_player-80 <= posx_drug0+10:
-        current_win = glutGetWindow()
-        glutDestroyWindow(current_win)
-        glutLeaveMainLoop()
+    if show_drug1 == True:
+        glPushMatrix()
+        drug1 = lg.Drug(-200,0)
+        glPopMatrix()
 
-    glPushMatrix()
-    pos_drug1 = lg.drug_pos(-200,0)
-    posx_drug1 = pos_drug1[0]
-    posy_drug1 = pos_drug1[1]
-    glPopMatrix()
+        if drug1.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
+            show_drug1 = False
 
-    if posy_player+35 >= posy_drug1+10 and posy_player-35 <= posy_drug1+40 and posx_player+80 >= posx_drug1+46 and posx_player-80 <= posx_drug1+10:
-        current_win = glutGetWindow()
-        glutDestroyWindow(current_win)
-        glutLeaveMainLoop()
+    if show_drug2 == True:
+        glPushMatrix()
+        drug2 = lg.Drug(200,200)
+        glPopMatrix()
 
-    glPushMatrix()
-    pos_drug2 = lg.drug_pos(200,200)
-    posx_drug2 = pos_drug2[0]
-    posy_drug2 = pos_drug2[1]
-    glPopMatrix()
+        if drug2.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
+            show_drug2 = False
 
-    if posy_player+35 >= posy_drug2+10 and posy_player-35 <= posy_drug2+40 and posx_player+80 >= posx_drug2+46 and posx_player-80 <= posx_drug2+10:
-        current_win = glutGetWindow()
-        glutDestroyWindow(current_win)
-        glutLeaveMainLoop()
+    if show_drug3 == True:
+        glPushMatrix()
+        drug3 = lg.Drug(200,-200)
+        glPopMatrix()
 
-    glPushMatrix()
-    pos_drug3 = lg.drug_pos(200,-200)
-    posx_drug3 = pos_drug3[0]
-    posy_drug3 = pos_drug3[1]
-    glPopMatrix()
-
-    if posy_player+35 >= posy_drug3+10 and posy_player-35 <= posy_drug3+40 and posx_player+80 >= posx_drug3+46 and posx_player-80 <= posx_drug3+10:
-        current_win = glutGetWindow()
-        glutDestroyWindow(current_win)
-        glutLeaveMainLoop()
+        if drug3.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
+            show_drug3 = False
 
 #==========================================
 
     glPushMatrix()
-    pos_entity0 = le.RL(50,0, move, 200)
-    posx_entity0 = pos_entity0[0]
-    posy_entity0 = pos_entity0[1]
+    entity0 = le.EntityRL(50, 0, move, 200)
     glPopMatrix()
 
-    if posy_player+35 >= posy_entity0-35 and posy_player-35 <= posy_entity0+35 and posx_player+100 >= posx_entity0+30 and posx_player-100 <= posx_entity0-30:
-        current_win = glutGetWindow()
-        glutDestroyWindow(current_win)
-        glutLeaveMainLoop()
+    if entity0.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
+        lp.step_x = 0
+        lp.step_y = 0
 
     glPushMatrix()
-    pos_entity1 = le.UD(0,150, move, 80)
-    posx_entity1 = pos_entity1[0]
-    posy_entity1 = pos_entity1[1]
+    entity1 = le.EntityUD(0, 150, move, 80)
     glPopMatrix()
 
-    if posy_player+35 >= posy_entity1-35 and posy_player-35 <= posy_entity1+35 and posx_player+100 >= posx_entity1+30 and posx_player-100 <= posx_entity1-30:
-        current_win = glutGetWindow()
-        glutDestroyWindow(current_win)
-        glutLeaveMainLoop()
+    if entity1.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
+        lp.step_x = 0
+        lp.step_y = 0
+
     glFlush()
 
 glutInit()

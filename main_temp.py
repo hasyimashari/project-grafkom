@@ -5,22 +5,24 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import menu.menu_ui as menu
-# import entity.logic_entity as entity
-# import player.logic_player as player
+from stage import logic_player as lp
+from stage import logic_player2 as lp2
+from stage import logic_player3 as lp3
+from stage import logic_player4 as lp4
+from stage import stage1
+from stage import stage2
+from stage import stage3
+from stage import stage4
 
-w,h = 800,600
+w,h = 1200, 750
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 menu_pointer = 1
 
 def init():
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
     glClearColor(0.0, 0.0, 0.0, 1.0)
     glOrtho(-(w/2), w/2, -(h/2), h/2, 0.0, 1.0)
-
-# def game_screen():
-#     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-#     entity.enemy()
-#     player.player()
-#     glFlush()
 
 def update(value):
     glutReshapeWindow(w,h)
@@ -46,9 +48,35 @@ def up_menu(key, x, y):
 
 def escape(key, x, y):
     if ord(key) == 26+1:
-        current_win = glutGetWindow()
-        glutDestroyWindow(current_win)
-        main_win()
+            change_menu()
+            glutKeyboardFunc(menu_func)
+            glutSpecialFunc(up_menu)
+
+def game_screen():
+    init()
+    if stage1.count_collect <= 4:
+        glPushMatrix()
+        stage1.stage_screen()
+        glPopMatrix()
+        glutSpecialFunc(lp.input_keyboard_player)
+    if stage1.count_collect >= 4 and stage2.count_collect <= 4:
+        stage1.count_collect+=1
+        glPushMatrix()
+        stage2.stage_screen()
+        glPopMatrix()
+        glutSpecialFunc(lp2.input_keyboard_player)
+    if stage2.count_collect >= 4 and stage3.count_collect <= 4:
+        stage2.count_collect+=1
+        glPushMatrix()
+        stage3.stage_screen()
+        glPopMatrix()
+        glutSpecialFunc(lp3.input_keyboard_player)
+    if stage3.count_collect >= 4 and stage4.count_collect <= 4:
+        stage3.count_collect+=1
+        glPushMatrix()
+        stage4.stage_screen()
+        glPopMatrix()
+        glutSpecialFunc(lp4.input_keyboard_player)
 
 # def change_res(key, x, y):
 #     global w, h, w_position, h_position
@@ -77,12 +105,8 @@ def draw_text(text,xpos,ypos,r,b,g):
 def menu_func(key, x, y):
     global w, h, w_position, h_position, main_win, game_win, setting_win
     if ord(key) == 13 and menu_pointer == 1:    
-        current_win = glutGetWindow()
-        glutDestroyWindow(current_win)
-        game_win = glutCreateWindow("Project Pacman Wannabe")
         glutDisplayFunc(game_screen)
         glutKeyboardFunc(escape)
-        glutSpecialFunc(player.input_keyboard_player)
         init()
     elif ord(key) == 13 and menu_pointer == 2:
         pass

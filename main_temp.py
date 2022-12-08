@@ -5,6 +5,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import menu.menu_ui as menu
+import menu.game_over as go
 from stage import logic_player as lp
 from stage import logic_player2 as lp2
 from stage import logic_player3 as lp3
@@ -17,6 +18,8 @@ from stage import stage4
 w,h = 1200, 750
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 menu_pointer = 1
+game_over = False
+
 
 def init():
     glMatrixMode(GL_PROJECTION)
@@ -34,7 +37,7 @@ def change_menu():
     if menu_pointer == 1:
         glutDisplayFunc(menu.start)
     elif menu_pointer == 2:
-        glutDisplayFunc(menu.option)
+        glutDisplayFunc(menu.how)
     elif menu_pointer == 3:
         glutDisplayFunc(menu.quit_game)
 
@@ -47,47 +50,45 @@ def up_menu(key, x, y):
     change_menu()
 
 def escape(key, x, y):
+    global game_over
     if ord(key) == 26+1:
+            game_over = False
             change_menu()
             glutKeyboardFunc(menu_func)
             glutSpecialFunc(up_menu)
 
 def game_screen():
+    global game_over
     init()
-    if stage1.count_collect <= 4:
-        glPushMatrix()
+    if stage1.count_collect <= 4 and stage1.game_over==False:
         stage1.stage_screen()
-        glPopMatrix()
+        if stage1.game_over:
+            game_over = True
         glutSpecialFunc(lp.input_keyboard_player)
-    if stage1.count_collect >= 4 and stage2.count_collect <= 4:
+
+    if stage1.count_collect >= 4 and stage2.count_collect <= 4 and game_over==False:
         stage1.count_collect+=1
-        glPushMatrix()
         stage2.stage_screen()
-        glPopMatrix()
+        if stage2.game_over:
+            game_over = True
         glutSpecialFunc(lp2.input_keyboard_player)
-    if stage2.count_collect >= 4 and stage3.count_collect <= 4:
+
+    if stage2.count_collect >= 4 and stage3.count_collect <= 4 and game_over==False:
         stage2.count_collect+=1
-        glPushMatrix()
         stage3.stage_screen()
-        glPopMatrix()
+        if stage3.game_over:
+            game_over = True
         glutSpecialFunc(lp3.input_keyboard_player)
-    if stage3.count_collect >= 4 and stage4.count_collect <= 4:
+
+    if stage3.count_collect >= 4 and stage4.count_collect <= 4 and game_over==False:
         stage3.count_collect+=1
-        glPushMatrix()
         stage4.stage_screen()
-        glPopMatrix()
+        if stage4.game_over:
+            game_over = True
         glutSpecialFunc(lp4.input_keyboard_player)
 
-# def change_res(key, x, y):
-#     global w, h, w_position, h_position
-#     if key == GLUT_KEY_UP: 
-#         glutDisplayFunc(menu_ui.start)
-#         w,h = 800,600
-#         w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
-#     elif key == GLUT_KEY_DOWN: 
-#         glutDisplayFunc(menu_ui.option)
-#         w,h = 600,450 
-#         w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
+    if game_over == True:
+        go.back()
 
 def draw_text(text,xpos,ypos,r,b,g):
     color = (r, b, g)
@@ -110,13 +111,7 @@ def menu_func(key, x, y):
         init()
     elif ord(key) == 13 and menu_pointer == 2:
         pass
-        # current_win = glutGetWindow()
-        # glutDestroyWindow(current_win)
-        # setting_win = glutCreateWindow("Project Pacman Wannabe")
-        # glutDisplayFunc(menu_ui.start)
-        # glutKeyboardFunc(escape)
-        # glutSpecialFunc(change_res)
-        # init()
+
     elif ord(key) == 13 and menu_pointer == 3:    
         current_win = glutGetWindow()
         glutDestroyWindow(current_win)

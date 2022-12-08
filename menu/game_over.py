@@ -3,8 +3,6 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import main_temp
 
-w, h = main_temp.w, main_temp.h
-
 class Menu:
     def __init__(self, x, y):
         self.x1 = x
@@ -53,60 +51,16 @@ class Menu:
         font_style = GLUT_BITMAP_TIMES_ROMAN_24
         glColor3ub(color[0],color[1],color[2])
         line=0
-        glRasterPos2f(self.x1-430, self.y1-33)
+        glRasterPos2f(self.x1-525, self.y1-33)
         for i in text:
             glutBitmapCharacter(font_style, ord(i))
 
-def menu_start_not_selected():
-    menu = Menu(400, 100)
-    menu.draw_MenuNotSelect()
-    menu.draw_text("Start", 255, 255, 255)
-
-def menu_how_not_selected():
-    menu = Menu(400, 34)
-    menu.draw_MenuNotSelect()
-    menu.draw_text("How to play", 255, 255, 255)
-
-def menu_quit_not_selected():
-    menu = Menu(400, -32)
-    menu.draw_MenuNotSelect()
-    menu.draw_text("Quit", 255, 255, 255)
-
-def menu_start_selected():
-    menu = Menu(400, 100)
-    menu.draw_MenuSelect()
-    menu.draw_text("Start", 0, 0, 0)
-
-def menu_how_selected():
+def menu_back_selected():
     menu = Menu(400, 34)
     menu.draw_MenuSelect()
-    menu.draw_text("How to play", 0, 0, 0)
+    menu.draw_text("press ESC to back to menu", 0, 0, 0)
 
-def menu_quit_selected():
-    menu = Menu(400, -32)
-    menu.draw_MenuSelect()
-    menu.draw_text("Quit", 0, 0, 0)
-
-def bg_menu():
-    global w,h
-
-def start():
+def back():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    menu_start_selected()
-    menu_how_not_selected()
-    menu_quit_not_selected()
-    glFlush()
-
-def how():
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    menu_start_not_selected()
-    menu_how_selected()
-    menu_quit_not_selected()
-    glFlush()
-
-def quit_game():
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    menu_start_not_selected()
-    menu_how_not_selected()
-    menu_quit_selected()
+    menu_back_selected()
     glFlush()

@@ -33,12 +33,11 @@ show_drug1 = True
 show_drug2 = True
 show_drug3 = True
 
-collect_all = False
-
 count_collect = 0
+game_over = False
 
 def stage_screen():
-    global show_drug0, show_drug1, show_drug2, show_drug3, count_collect
+    global show_drug0, show_drug1, show_drug2, show_drug3, count_collect, game_over
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
 
@@ -125,6 +124,8 @@ def stage_screen():
     if entity0.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
         lp.step_x = 0
         lp.step_y = 0
+        game_over = True
+
 
     glPushMatrix()
     entity1 = le.EntityRL(-50, 100, move, 300)
@@ -133,6 +134,7 @@ def stage_screen():
     if entity1.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
         lp.step_x = 0
         lp.step_y = 0
+        game_over = True
 
     glPushMatrix()
     entity2 = le.EntityUD(325,100, move, 125)
@@ -141,6 +143,7 @@ def stage_screen():
     if entity2.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
         lp.step_x = 0
         lp.step_y = 0
+        game_over = True
 
     glFlush()
 

@@ -4,10 +4,10 @@ sys.dont_write_bytecode = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import logic_player as lp
-import logic_entity as le
-import logic_drug as lg
-from map import map3
+from stage import logic_player3 as lp
+from stage import logic_entity as le
+from stage import logic_drug as lg 
+from stage.map import map3
 
 w,h=1200, 750
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
@@ -133,12 +133,13 @@ def stage_screen():
 
     glFlush()
 
-glutInit()
-glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
-glutInitWindowSize(w, h)
-glutInitWindowPosition(int(w_position), int(h_position))
-glutCreateWindow("Project Pacman Wannabe")
-glutDisplayFunc(stage_screen)
-glutSpecialFunc(lp.input_keyboard_player)
-glutTimerFunc(10,update,0)
-glutMainLoop()
+def main():
+    glutInit()
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
+    glutInitWindowSize(w, h)
+    glutInitWindowPosition(int(w_position), int(h_position))
+    glutCreateWindow("Project Pacman Wannabe")
+    glutDisplayFunc(stage_screen)
+    glutSpecialFunc(lp.input_keyboard_player)
+    glutTimerFunc(10,update,0)
+    glutMainLoop()

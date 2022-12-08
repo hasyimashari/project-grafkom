@@ -7,6 +7,10 @@ from stage.player import playerRigh
 from stage.player import playerUp
 from stage.player import playerIdle
 
+centerx,centery = 0,0
+movex,movey = centerx-40,centery-40
+step_x, step_y = 0,0
+
 def player_idle():
     playerIdle.player()
     playerIdle.lubang()
@@ -47,10 +51,6 @@ def player_down():
     playerDown.pusatmatakanan()
     playerDown.pusatmatakiri()
 
-centerx,centery = 0,0
-movex,movey = centerx-40,centery-40
-step_x, step_y = 0,0
-
 def player_move(posx, posy):
     global movex, movey, centerx, centery, step_x, step_y
     
@@ -71,6 +71,7 @@ def player_move(posx, posy):
         player_right()
     elif step_x==-2 and step_y==0:
         player_left()
+
     return [posx+centerx, posy+centery]
 
 def input_keyboard_player(key,x,y):
@@ -87,3 +88,4 @@ def input_keyboard_player(key,x,y):
     elif key == GLUT_KEY_LEFT:
         step_x = -2
         step_y = 0
+

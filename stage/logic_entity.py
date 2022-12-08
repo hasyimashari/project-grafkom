@@ -1,7 +1,7 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-from Entity import entity
+from stage.Entity import entity
 
 center_xRL,center_yRL = 0,0
 moveRL, move_xRL,move_yRL = 0, center_xRL-30, center_yRL-35

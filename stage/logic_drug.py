@@ -1,7 +1,7 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-from drug import drugmodels 
+from stage.drug import drugmodels 
 
 class Drug:
     def __init__(self,x,y):

@@ -20,7 +20,6 @@ w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (cty
 menu_pointer = 1
 game_over = False
 
-
 def init():
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
@@ -33,14 +32,6 @@ def update(value):
     glutPostRedisplay()
     glutTimerFunc(25,update,0)
 
-def change_menu():
-    if menu_pointer == 1:
-        glutDisplayFunc(menu.start)
-    elif menu_pointer == 2:
-        glutDisplayFunc(menu.how)
-    elif menu_pointer == 3:
-        glutDisplayFunc(menu.quit_game)
-
 def up_menu(key, x, y):
     global menu_pointer
     if key == GLUT_KEY_UP:
@@ -49,65 +40,18 @@ def up_menu(key, x, y):
         menu_pointer = menu_pointer + 1 if menu_pointer < 3 else 1
     change_menu()
 
-def escape(key, x, y):
-    global game_over
-    if ord(key) == 26+1:
-            game_over = False
-            change_menu()
-            glutKeyboardFunc(menu_func)
-            glutSpecialFunc(up_menu)
-
-def game_screen():
-    global game_over
-    init()
-    if stage1.count_collect <= 4 and stage1.game_over==False:
-        stage1.stage_screen()
-        if stage1.game_over:
-            game_over = True
-        glutSpecialFunc(lp.input_keyboard_player)
-
-    if stage1.count_collect >= 4 and stage2.count_collect <= 4 and game_over==False:
-        stage1.count_collect+=1
-        stage2.stage_screen()
-        if stage2.game_over:
-            game_over = True
-        glutSpecialFunc(lp2.input_keyboard_player)
-
-    if stage2.count_collect >= 4 and stage3.count_collect <= 4 and game_over==False:
-        stage2.count_collect+=1
-        stage3.stage_screen()
-        if stage3.game_over:
-            game_over = True
-        glutSpecialFunc(lp3.input_keyboard_player)
-
-    if stage3.count_collect >= 4 and stage4.count_collect <= 4 and game_over==False:
-        stage3.count_collect+=1
-        stage4.stage_screen()
-        if stage4.game_over:
-            game_over = True
-        glutSpecialFunc(lp4.input_keyboard_player)
-
-    if game_over == True:
-        go.back()
-
-def draw_text(text,xpos,ypos,r,b,g):
-    color = (r, b, g)
-    font_style = GLUT_BITMAP_HELVETICA_18
-    glColor3ub(color[0],color[1],color[2])
-    line=0
-    glRasterPos2f(xpos, ypos)
-    for i in text:
-        if  i=='\n':
-            line=line+1
-            glRasterPos2f (xpos, ypos*line)
-        else:
-            glutBitmapCharacter(font_style, ord(i))
+def change_menu():
+    if menu_pointer == 1:
+        glutDisplayFunc(menu.start)
+    elif menu_pointer == 2:
+        glutDisplayFunc(menu.how)
+    elif menu_pointer == 3:
+        glutDisplayFunc(menu.quit_game)
 
 def menu_func(key, x, y):
     global w, h, w_position, h_position, main_win, game_win, setting_win
     if ord(key) == 13 and menu_pointer == 1:    
         glutDisplayFunc(game_screen)
-        glutKeyboardFunc(escape)
         init()
     elif ord(key) == 13 and menu_pointer == 2:
         pass
@@ -116,6 +60,52 @@ def menu_func(key, x, y):
         current_win = glutGetWindow()
         glutDestroyWindow(current_win)
         glutLeaveMainLoop()       
+
+def escape(key, x, y):
+    global game_over
+    if ord(key) == 26+1:
+        stage1.game_over = False
+        change_menu()
+        glutKeyboardFunc(menu_func)
+        glutSpecialFunc(up_menu)
+
+def game_screen():
+    global game_over
+    init()
+
+    if stage1.count_collect <= 4:
+        stage1.stage_screen()
+        if stage1.game_over:
+            game_over = True
+            # lp.centerx,lp.centery = 0,0
+            # lp.movey, lp.movex = lp.centerx-40, lp.centery-40
+            # lp.step_x, lp.xtep_y = 0,0
+        glutSpecialFunc(lp.input_keyboard_player)
+        glutKeyboardFunc(escape)
+
+    if stage1.count_collect >= 4 and stage2.count_collect <= 4:
+        stage1.count_collect+=1
+        stage2.stage_screen()
+        if stage2.game_over:
+            game_over = True
+        glutSpecialFunc(lp2.input_keyboard_player)
+
+    if stage2.count_collect >= 4 and stage3.count_collect <= 4:
+        stage2.count_collect+=1
+        stage3.stage_screen()
+        if stage3.game_over:
+            game_over = True
+        glutSpecialFunc(lp3.input_keyboard_player)
+
+    if stage3.count_collect >= 4 and stage4.count_collect <= 4:
+        stage3.count_collect+=1
+        stage4.stage_screen()
+        if stage4.game_over:
+            game_over = True
+        glutSpecialFunc(lp4.input_keyboard_player)
+
+    if game_over == True:
+        go.back()
 
 def main_win():
     glutInit()
@@ -128,6 +118,7 @@ def main_win():
     glutSpecialFunc(up_menu)
     glutTimerFunc(10,update,0)
     init()
+
 
 if __name__ == '__main__':
     main_win()

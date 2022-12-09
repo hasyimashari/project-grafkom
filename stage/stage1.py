@@ -83,8 +83,9 @@ def stage_screen():
         glPopMatrix()
 
         if drug2.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
-            show_drug2 = False
-            count_collect+=1
+            current_win = glutGetWindow()
+            glutDestroyWindow(current_win)
+            glutLeaveMainLoop() 
 
     if show_drug3 == True:
         glPushMatrix()
@@ -126,5 +127,5 @@ def main():
     glutDisplayFunc(stage_screen)
     glutSpecialFunc(lp.input_keyboard_player)
     glutTimerFunc(10,update,0)
-    glutMainLoop()
+    # glutMainLoop()
 

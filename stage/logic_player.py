@@ -6,6 +6,7 @@ from stage.player import playerLeft
 from stage.player import playerRigh
 from stage.player import playerUp
 from stage.player import playerIdle
+import game_over_status
 
 def player_idle():
     playerIdle.player()
@@ -53,13 +54,19 @@ step_x, step_y = 0,0
 
 def player_move(posx, posy):
     global movex, movey, centerx, centery, step_x, step_y
-    
+
     movex+=step_x
     movey+=step_y
     centerx+=step_x
     centery+=step_y
 
     glTranslated(posx+movex, posy+movey, 0)
+
+    if game_over_status.game_over == True:
+        movex=(-40)
+        movey=(-40)
+        centerx=0
+        centery=0
     
     if step_x==0 and step_y==0:
         player_idle()

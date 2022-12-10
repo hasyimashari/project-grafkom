@@ -8,6 +8,7 @@ from stage import logic_player as lp
 from stage import logic_entity as le
 from stage import logic_drug as lg 
 from stage.map import map1
+import game_over_status
 
 w,h=1280, 720
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
@@ -34,10 +35,9 @@ show_drug2 = True
 show_drug3 = True
 
 count_collect = 0
-game_over = False
 
 def stage_screen():
-    global show_drug0, show_drug1, show_drug2, show_drug3, count_collect, game_over
+    global show_drug0, show_drug1, show_drug2, show_drug3, count_collect
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
 
@@ -102,17 +102,15 @@ def stage_screen():
     glPopMatrix()
 
     if entity0.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
-        lp.step_x = 0
-        lp.step_y = 0
-        game_over = True
+        game_over_status.game_over = True
+
 
     glPushMatrix()
     entity1 = le.EntityUD(0, 150, move, 80)
     glPopMatrix()
 
     if entity1.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
-        lp.step_x = 0
-        lp.step_y = 0
-        game_over = True
+        game_over_status.game_over = True
+
 
     glFlush()

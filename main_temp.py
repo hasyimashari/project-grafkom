@@ -5,7 +5,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import menu.menu_ui as menu
-import menu.game_over as go
+import menu.game_over as menu_go
 import menu.how_to as how
 from stage import logic_player as lp
 from stage import logic_player2 as lp2
@@ -15,9 +15,10 @@ from stage import stage1
 from stage import stage2
 from stage import stage3
 from stage import stage4
+import game_over_status as go
 
-w,h = 1280, 720
-# w,h= 852, 480
+# w,h = 1280, 720
+w,h= 852, 480
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 menu_pointer = 1
 game_over = False
@@ -53,67 +54,54 @@ def change_menu():
 def escape(key, x, y):
     global game_over
     if ord(key) == 26+1:
-        stage1.game_over = False
         init()
         change_menu()
         glutKeyboardFunc(menu_func)
         glutSpecialFunc(up_menu)
 
 def game_screen():
-    global game_over
     init()
-
     if stage1.count_collect <= 4:
         glPushMatrix()
         stage1.stage_screen()
         glPopMatrix()
-        if stage1.game_over:
-            game_over = True
-            # lp.centerx,lp.centery = 0,0
-            # lp.movey, lp.movex = lp.centerx-40, lp.centery-40
-            # lp.step_x, lp.xtep_y = 0,0
         glutSpecialFunc(lp.input_keyboard_player)
 
     if stage1.count_collect >= 4 and stage2.count_collect <= 4:
-        glPushMatrix()
         stage1.count_collect+=1
-        glPopMatrix()
+        glPushMatrix()
         stage2.stage_screen()
-        if stage2.game_over:
-            game_over = True
+        glPopMatrix()
         glutSpecialFunc(lp2.input_keyboard_player)
-        
 
     if stage2.count_collect >= 4 and stage3.count_collect <= 4:
-        glPushMatrix()
         stage2.count_collect+=1
-        glPopMatrix()
+        glPushMatrix()
         stage3.stage_screen()
-        if stage3.game_over:
-            game_over = True
+        glPopMatrix()
         glutSpecialFunc(lp3.input_keyboard_player)
 
     if stage3.count_collect >= 4 and stage4.count_collect <= 4:
-        glPushMatrix()
         stage3.count_collect+=1
-        glPopMatrix()
+        glPushMatrix()
         stage4.stage_screen()
-        if stage4.game_over:
-            game_over = True
+        glPopMatrix()
         glutSpecialFunc(lp4.input_keyboard_player)
     
-    if game_over == True:
+    if go.game_over == True:
         glPushMatrix()
-        go.back()
+        menu_go.back()
         glPopMatrix()
 
 def menu_func(key, x, y):
     global w, h, w_position, h_position, main_win, game_win, setting_win
-    if ord(key) == 13 and menu_pointer == 1:    
+    if ord(key) == 13 and menu_pointer == 1: 
+        go.game_over = False
         glutDisplayFunc(game_screen)
         glutKeyboardFunc(escape)
         init()
     elif ord(key) == 13 and menu_pointer == 2:
+        game_over_status.game_over = True
         glutDisplayFunc(how.how_screen)
         glutKeyboardFunc(escape)
         glutSpecialFunc(None)

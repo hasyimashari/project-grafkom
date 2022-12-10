@@ -8,6 +8,7 @@ from stage import logic_player3 as lp
 from stage import logic_entity as le
 from stage import logic_drug as lg 
 from stage.map import map3
+import game_over_status
 
 w,h=1280, 720
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)

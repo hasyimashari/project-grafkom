@@ -116,15 +116,3 @@ def stage_screen():
         game_over = True
 
     glFlush()
-
-def main():
-    glutInit()
-    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
-    glutInitWindowSize(w, h)
-    glutInitWindowPosition(int(w_position), int(h_position))
-    glutCreateWindow("Project Pacman Wannabe")
-    glutDisplayFunc(stage_screen)
-    glutSpecialFunc(lp.input_keyboard_player)
-    glutTimerFunc(10,update,0)
-    # glutMainLoop()
-

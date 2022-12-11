@@ -6,6 +6,7 @@ from stage.player import playerLeft
 from stage.player import playerRigh
 from stage.player import playerUp
 from stage.player import playerIdle
+import helper_status
 
 centerx,centery = 0,0
 movex,movey = centerx-40,centery-40
@@ -54,6 +55,14 @@ def player_down():
 def player_move(posx, posy):
     global movex, movey, centerx, centery, step_x, step_y
     
+    if helper_status.game_over == True:
+        movex=(-40)
+        movey=(-40)
+        centerx=0
+        centery=0
+        step_x=0
+        step_y=0
+
     movex+=step_x
     movey+=step_y
     centerx+=step_x

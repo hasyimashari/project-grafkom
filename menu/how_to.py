@@ -36,7 +36,7 @@ def menu_how():
     global move_up
     menu = Menu(0, 0)
     menu.draw_MenuNotSelect()
-    menu.draw_text("\nUse UP, DOWN, RIGHT, LEFT key to move\n\nEat all of drug to continue to next level\n\nYou touch enemy You die\n\nThere is NO save point :D", 255, 255, 255)
+    menu.draw_text("\nUse UP, DOWN, RIGHT, LEFT key to move\n\nEat all of drug to continue to next level\n\nYou touch enemy You die\n\nTou can restart where you get GAME OVER", 255, 255, 255)
 
 def how_screen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)

@@ -8,6 +8,7 @@ from stage import logic_player4 as lp
 from stage import logic_entity as le
 from stage import logic_drug as lg 
 from stage.map import map4
+import helper_status
 
 w,h=1280, 720
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
@@ -34,12 +35,14 @@ show_drug2 = True
 show_drug3 = True
 
 count_collect = 0
-game_over = False
 
 def stage_screen():
-    global show_drug0, show_drug1, show_drug2, show_drug3, game_over
+    global show_drug0, show_drug1, show_drug2, show_drug3, count_collect
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     init()
+
+    if count_collect >= 4:
+        helper_status.game_over = True
 
     glPushMatrix()
     map4.map4()
@@ -95,7 +98,7 @@ def stage_screen():
 
         if drug0.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug0 = False
-            count_collect = 0
+            count_collect+=1
 
     if show_drug1 == True:
         glPushMatrix()
@@ -104,7 +107,7 @@ def stage_screen():
 
         if drug1.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug1 = False
-            count_collect = 0
+            count_collect+=1
 
     if show_drug2 == True:
         glPushMatrix()
@@ -113,7 +116,7 @@ def stage_screen():
 
         if drug2.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug2 = False
-            count_collect = 0
+            count_collect+=1
 
     if show_drug3 == True:
         glPushMatrix()
@@ -122,9 +125,7 @@ def stage_screen():
 
         if drug3.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug3 = False
-            count_collect = 0
-            game_over = True
-
+            count_collect+=1
 
 #==========================================
 
@@ -133,46 +134,27 @@ def stage_screen():
     glPopMatrix()
 
     if entity0.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
-        lp.step_x = 0
-        lp.step_y = 0
-        game_over = True
+        helper_status.game_over = True
 
     glPushMatrix()
     entity1 = le.EntityUD(125,40, move, 180)
     glPopMatrix()
 
     if entity1.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
-        lp.step_x = 0
-        lp.step_y = 0
-        game_over = True
+        helper_status.game_over = True
 
     glPushMatrix()
     entity2 = le.EntityRL(0,40, move, 50)
     glPopMatrix()
 
     if entity2.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
-        lp.step_x = 0
-        lp.step_y = 0
-        game_over = True
+        helper_status.game_over = True
 
     glPushMatrix()
     entity3 = le.EntityRL(250,-40, move, 50)
     glPopMatrix()
 
     if entity3.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
-        lp.step_x = 0
-        lp.step_y = 0
-        game_over = True
+        helper_status.game_over = True
 
     glFlush()
-
-def main():
-    glutInit()
-    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
-    glutInitWindowSize(w, h)
-    glutInitWindowPosition(int(w_position), int(h_position))
-    glutCreateWindow("Project Pacman Wannabe")
-    glutDisplayFunc(stage_screen)
-    glutSpecialFunc(lp.input_keyboard_player)
-    glutTimerFunc(10,update,0)
-    glutMainLoop()

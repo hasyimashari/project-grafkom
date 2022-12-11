@@ -44,8 +44,6 @@ class EntityRL:
     def get_col(self, x1,x2,y1,y2):
         global moveRL, moveUD
         if y1 >= self.posy_entity-35 and y2 <= self.posy_entity+35 and x1 >= self.posx_entity+30 and x2 <= self.posx_entity-30:
-            moveRL = 0
-            moveUD = 0
             return True
 
 class EntityUD:
@@ -57,7 +55,5 @@ class EntityUD:
     def get_col(self, x1,x2,y1,y2):
         global moveRL, moveUD
         if y1 >= self.posy_entity-35 and y2 <= self.posy_entity+35 and x1 >= self.posx_entity+30 and x2 <= self.posx_entity-30:
-            moveRL = 0
-            moveUD = 0
             return True
 

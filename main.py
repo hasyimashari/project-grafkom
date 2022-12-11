@@ -7,6 +7,7 @@ from OpenGL.GLU import *
 import menu.menu_ui as menu
 import menu.game_over as menu_go
 import menu.how_to as how
+import helper_status as go
 from stage import logic_player as lp
 from stage import logic_player2 as lp2
 from stage import logic_player3 as lp3
@@ -15,7 +16,6 @@ from stage import stage1
 from stage import stage2
 from stage import stage3
 from stage import stage4
-import game_over_status as go
 
 # w,h = 1280, 720
 w,h= 852, 480
@@ -52,7 +52,6 @@ def change_menu():
         glutDisplayFunc(menu.quit_game)     
 
 def escape(key, x, y):
-    global game_over
     if ord(key) == 26+1:
         init()
         change_menu()
@@ -61,6 +60,7 @@ def escape(key, x, y):
 
 def game_screen():
     init()
+
     if stage1.count_collect <= 4:
         glPushMatrix()
         stage1.stage_screen()
@@ -69,6 +69,7 @@ def game_screen():
 
     if stage1.count_collect >= 4 and stage2.count_collect <= 4:
         stage1.count_collect+=1
+
         glPushMatrix()
         stage2.stage_screen()
         glPopMatrix()
@@ -76,19 +77,21 @@ def game_screen():
 
     if stage2.count_collect >= 4 and stage3.count_collect <= 4:
         stage2.count_collect+=1
+
         glPushMatrix()
         stage3.stage_screen()
         glPopMatrix()
         glutSpecialFunc(lp3.input_keyboard_player)
 
-    if stage3.count_collect >= 4 and stage4.count_collect <= 4:
+    if stage3.count_collect >= 4 and stage4.count_collect < 4:
         stage3.count_collect+=1
+
         glPushMatrix()
         stage4.stage_screen()
         glPopMatrix()
         glutSpecialFunc(lp4.input_keyboard_player)
     
-    if go.game_over == True:
+    if go.game_over == True or stage4.count_collect >= 4:
         glPushMatrix()
         menu_go.back()
         glPopMatrix()
@@ -100,12 +103,13 @@ def menu_func(key, x, y):
         glutDisplayFunc(game_screen)
         glutKeyboardFunc(escape)
         init()
+
     elif ord(key) == 13 and menu_pointer == 2:
-        game_over_status.game_over = True
         glutDisplayFunc(how.how_screen)
         glutKeyboardFunc(escape)
         glutSpecialFunc(None)
         init()
+        
     elif ord(key) == 13 and menu_pointer == 3:    
         current_win = glutGetWindow()
         glutDestroyWindow(current_win)

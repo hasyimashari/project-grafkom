@@ -120,7 +120,7 @@ def main_win():
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
     glutInitWindowSize(w, h)
     glutInitWindowPosition(int(w_position), int(h_position))
-    main_win = glutCreateWindow("Project Pacman Wannabe")
+    main_win = glutCreateWindow("GIZLI")
     change_menu()
     glutKeyboardFunc(menu_func)
     glutSpecialFunc(up_menu)

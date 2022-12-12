@@ -2,8 +2,6 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
-w,h=2000,2000
-
 def modelkanan():
     glScaled(.5,.5,0)
     glColor3ub(255, 0, 0)

@@ -35,6 +35,7 @@ def update(value):
     glutPostRedisplay()
     glutTimerFunc(25,update,0)
 
+# fungsi untuk merubah mouse pointer
 def up_menu(key, x, y):
     global menu_pointer
     if key == GLUT_KEY_UP:
@@ -43,6 +44,7 @@ def up_menu(key, x, y):
         menu_pointer = menu_pointer + 1 if menu_pointer < 3 else 1
     change_menu()
 
+# fungsi untuk menganti tampilan menu
 def change_menu():
     if menu_pointer == 1:
         glutDisplayFunc(menu.start)
@@ -51,6 +53,7 @@ def change_menu():
     elif menu_pointer == 3:
         glutDisplayFunc(menu.quit_game)     
 
+# fungsi untuk kembali
 def escape(key, x, y):
     if ord(key) == 26+1:
         init()
@@ -58,6 +61,7 @@ def escape(key, x, y):
         glutKeyboardFunc(menu_func)
         glutSpecialFunc(up_menu)
 
+# fungsi untuk gamenya
 def game_screen():
     init()
 
@@ -96,6 +100,7 @@ def game_screen():
         menu_go.back()
         glPopMatrix()
 
+# fungsi untuk menu
 def menu_func(key, x, y):
     global w, h, w_position, h_position, main_win, game_win, setting_win
     if ord(key) == 13 and menu_pointer == 1: 

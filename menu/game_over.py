@@ -26,6 +26,7 @@ class Menu:
         for i in text:
             glutBitmapCharacter(font_style, ord(i))
 
+# membuat tampilan dan menu dari game over
 def menu_back():
     menu = Menu(0, 0)
     menu.draw_MenuSelect()

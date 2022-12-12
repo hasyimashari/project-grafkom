@@ -2,7 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
-w,h=2000,2000
+
 #titik tengah 200,250
 def Entity():
     glScaled(.1,.1,0)

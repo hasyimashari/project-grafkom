@@ -3,55 +3,74 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from stage.Entity import entity
 
+# mendeklarasikan titik tengah dari entity titik pergeseran dari entity
+# mendeklarasikan cepat pergerakan entity
 center_xRL,center_yRL = 0,0
 moveRL, move_xRL,move_yRL = 0, center_xRL-30, center_yRL-35
 
+# tittik dari entity yang bergerak kanan kiri dan atas bawah dibuat beda agar tidak terjadi konflik
 center_xUD,center_yUD = 0,0
 moveUD, move_xUD,move_yUD = 0, center_xUD-30, center_yUD-35
 
+#fungsi untuk entity kanan kiri
 def RL(posx, posy, step, distance):
     global move_xRL, moveRL, center_xRL
+
     if center_xRL >= distance:
         moveRL = -step
     elif center_xRL <= -distance:
         moveRL = step
+
     move_xRL += moveRL
     center_xRL += moveRL
+
     glTranslated(move_xRL+posx, move_yRL+posy,0)
+
     entity.Entity()
     entity.mulut()
+    # mereturn titik tengah darin entity
     return [posx+center_xRL, posy+center_yRL]
 
+#fungsi untuk entity atas bawah
 def UD(posx, posy, step, distance):
     global move_yUD, moveUD, center_yUD
+
     if center_yUD >= distance:
         moveUD = -step
     elif center_yUD <= -distance:
         moveUD = step
+
     move_yUD += moveUD
     center_yUD += moveUD
+
     glTranslated(move_xUD+posx, move_yUD+posy,0)
+
     entity.Entity()
     entity.mulut()
+    # mereturn titik tengah darin entity
     return [posx+center_xUD, posy+center_yUD]
 
+# class untuk entity kanan kiri
 class EntityRL:
     def __init__(self,x,y,move,distance):
         self.pos_entity = RL(x,y, move, distance)
         self.posx_entity = self.pos_entity[0]
         self.posy_entity = self.pos_entity[1]
 
+    # untuk mencari collision
     def get_col(self, x1,x2,y1,y2):
         global moveRL, moveUD
         if y1 >= self.posy_entity-35 and y2 <= self.posy_entity+35 and x1 >= self.posx_entity+30 and x2 <= self.posx_entity-30:
             return True
 
+# class untuk entity atas bawah
 class EntityUD:
     def __init__(self,x,y,move,distance):
         self.pos_entity = UD(x,y, move, distance)
         self.posx_entity = self.pos_entity[0]
         self.posy_entity = self.pos_entity[1]
 
+    # untuk mencari collision
     def get_col(self, x1,x2,y1,y2):
         global moveRL, moveUD
         if y1 >= self.posy_entity-35 and y2 <= self.posy_entity+35 and x1 >= self.posx_entity+30 and x2 <= self.posx_entity-30:

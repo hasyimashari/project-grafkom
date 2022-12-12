@@ -48,6 +48,7 @@ def player_down():
     playerDown.pusatmatakanan()
     playerDown.pusatmatakiri()
 
+# mendeklarasikan titik tengah, pergeseran, dan cepat pergerakan untuk player 
 centerx,centery = 0,0
 movex,movey = centerx-40,centery-40
 step_x, step_y = 0,0
@@ -55,6 +56,7 @@ step_x, step_y = 0,0
 def player_move(posx, posy):
     global movex, movey, centerx, centery, step_x, step_y
 
+    # jika game over akan kembali ke posisi semula
     if helper_status.game_over == True:
         movex=(-40)
         movey=(-40)
@@ -70,7 +72,6 @@ def player_move(posx, posy):
 
     glTranslated(posx+movex, posy+movey, 0)
 
-    
     if step_x==0 and step_y==0:
         player_idle()
     elif step_x==0 and step_y==2:
@@ -83,6 +84,7 @@ def player_move(posx, posy):
         player_left()
     return [posx+centerx, posy+centery]
 
+# fungsi untuk menggerakan player
 def input_keyboard_player(key,x,y):
     global step_x, step_y
     if key == GLUT_KEY_UP:

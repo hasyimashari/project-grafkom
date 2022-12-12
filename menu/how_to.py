@@ -31,7 +31,7 @@ class Menu:
                 glRasterPos2f(self.x-220, (self.y+22)-(20*line))
             else:
                 glutBitmapCharacter(font_style, ord(i))
-
+# membuat tampilan dan fungsi dari menu how to
 def menu_how():
     global move_up
     menu = Menu(0, 0)

@@ -10,7 +10,7 @@ from stage.drug import logic_drug as lg
 from stage.map import map3
 import helper_status
 
-w,h=1280, 720
+w,h= 852, 480
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 
 def init():

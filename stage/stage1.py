@@ -10,7 +10,7 @@ from stage.drug import logic_drug as lg
 from stage.map import map1
 import helper_status
 
-w,h=1280, 720
+w,h= 852, 480
 w_position,h_position = (ctypes.windll.user32.GetSystemMetrics(0)/2)-(w/2), (ctypes.windll.user32.GetSystemMetrics(1)/2)-(h/2)
 
 def init():
@@ -34,6 +34,7 @@ show_drug1 = True
 show_drug2 = True
 show_drug3 = True
 
+# menghitung sebanyak drug yang sudah dimakan player
 count_collect = 0
 
 def stage_screen():
@@ -46,25 +47,27 @@ def stage_screen():
     glPopMatrix()
 
 #==========================================
-
+    # mendeklarasikan player pada posisi tertentu
     glPushMatrix()
     pos_player = lp.player_move(0,-200)
     posx_player = pos_player[0]
     posy_player = pos_player[1]
     glPopMatrix()
 
+    # collision player kepada tembok map
     if posx_player+40>=270-4 or posx_player-40<-270+4:
         lp.step_x=0
     if posy_player+35>=270 or posy_player-35<-270:
         lp.step_y=0
 
 #==========================================
-
+    # untuk menampilkan drug
     if show_drug0 == True:
         glPushMatrix()
         drug0 = lg.Drug(-200, 200)
         glPopMatrix()
 
+        # jika collision dengan player maka drug akan menghilang
         if drug0.get_col(posx_player+80, posx_player-80, posy_player+35, posy_player-35):
             show_drug0 = False
             count_collect+=1
@@ -98,13 +101,14 @@ def stage_screen():
 
 #==========================================
 
+    # mendeklarasikan entity
     glPushMatrix()
     entity0 = le.EntityRL(50, 0, move, 200)
     glPopMatrix()
 
+    # jika enitity collision dengan player maka akan game over
     if entity0.get_col(posx_player+95, posx_player-95, posy_player+20, posy_player-20):
         helper_status.game_over = True
-
 
     glPushMatrix()
     entity1 = le.EntityUD(0, 150, move, 80)

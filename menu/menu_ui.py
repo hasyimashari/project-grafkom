@@ -2,11 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
-def init():
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glClearColor(0.0, 0.0, 0.0, 1.0)
-    glOrtho(-(w/2), w/2, -(h/2), h/2, 0.0, 1.0)
+#class untuk membuat tampilan menu
 class Menu:
     def __init__(self, xcenter, ycenter):   #titik tengah dari kotak
         self.x = xcenter
@@ -43,8 +39,8 @@ class Menu:
         for i in text:
             glutBitmapCharacter(font_style, ord(i))
 
+# membuat tampila menu
 #jarak antar titik tengah kota = 90
-
 def menu_start_not_selected():
     menu = Menu(0, 45)
     menu.draw_MenuNotSelect()
@@ -75,9 +71,7 @@ def menu_quit_selected():
     menu.draw_MenuSelect()
     menu.draw_text("Quit", 0, 0, 0)
 
-def bg_menu():
-    global w,h
-
+# fungsi untuk menampilkan menu
 def start():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     menu_start_selected()

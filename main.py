@@ -8,10 +8,10 @@ import menu.menu_ui as menu
 import menu.game_over as menu_go
 import menu.how_to as how
 import helper_status as go
-from stage import logic_player as lp
-from stage import logic_player2 as lp2
-from stage import logic_player3 as lp3
-from stage import logic_player4 as lp4
+from stage.player import logic_player as lp
+from stage.player import logic_player2 as lp2
+from stage.player import logic_player3 as lp3
+from stage.player import logic_player4 as lp4
 from stage import stage1
 from stage import stage2
 from stage import stage3
@@ -109,7 +109,7 @@ def menu_func(key, x, y):
         glutKeyboardFunc(escape)
         glutSpecialFunc(None)
         init()
-        
+
     elif ord(key) == 13 and menu_pointer == 3:    
         current_win = glutGetWindow()
         glutDestroyWindow(current_win)
@@ -120,7 +120,7 @@ def main_win():
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
     glutInitWindowSize(w, h)
     glutInitWindowPosition(int(w_position), int(h_position))
-    main_win = glutCreateWindow("ghistly")
+    main_win = glutCreateWindow("GIZLI)
     change_menu()
     glutKeyboardFunc(menu_func)
     glutSpecialFunc(up_menu)

@@ -4,9 +4,9 @@ sys.dont_write_bytecode = True
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-from stage import logic_player as lp
-from stage import logic_entity as le
-from stage import logic_drug as lg 
+from stage.player import logic_player as lp
+from stage.Entity import logic_entity as le
+from stage.drug import logic_drug as lg 
 from stage.map import map1
 import helper_status
 
